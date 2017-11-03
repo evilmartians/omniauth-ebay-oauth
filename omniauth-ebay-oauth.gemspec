@@ -1,17 +1,14 @@
-
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "omniauth/ebay/oauth/version"
+require File.expand_path('../lib/omniauth-ebay-oauth/version', __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name          = "omniauth-ebay-oauth"
-  spec.version       = Omniauth::Ebay::Oauth::VERSION
-  spec.authors       = ["Andrey"]
-  spec.email         = ["paderinandrey2011@gmail.com"]
+  spec.version       = OmniAuth::EbayOAuth2::VERSION
+  spec.authors       = ["Andrey Paderin", "Andrey Novikov"]
+  spec.email         = ["paderinandrey2011@gmail.com", "envek@envek.name"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{A Ebay OAuth2 strategy for OmniAuth}
+  spec.description   = %q{A Ebay OAuth2 strategy for OmniAuth}
+  spec.homepage      = "https://github.com/Envek/omniauth-ebay-oauth"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -23,12 +20,14 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  spec.files         = `git ls-files`.split("\n")
+  spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   spec.require_paths = ["lib"]
+
+  spec.add_runtime_dependency 'omniauth', '~> 1.0'
+  spec.add_runtime_dependency 'omniauth-oauth2', '~> 1.0'
+  spec.add_runtime_dependency 'oauth2', '~> 1.3'
 
   spec.add_development_dependency "bundler", "~> 1.16.a"
   spec.add_development_dependency "rake", "~> 10.0"
