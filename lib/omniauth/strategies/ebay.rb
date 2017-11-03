@@ -20,6 +20,16 @@ module OmniAuth
       def callback_url
         options.callback_url
       end
+
+      uid  { user_info.dig('GetUserResponse', 'User', 'Email') }
+      info { user_info.dig('GetUserResponse', 'User', 'SellerInfo') }
+
+      private
+
+      def user_info
+        @user_info ||=
+          Omniauth::Ebay::UserInfo.new(access_token.token, client.options).call
+      end
     end
   end
 end

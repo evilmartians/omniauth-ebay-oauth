@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetUserResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+  <Timestamp>2017-11-03T15:10:16.972Z</Timestamp>
+  <Ack>Failure</Ack>
+  <Errors>
+    <ShortMessage>Expired IAF token.</ShortMessage>
+    <LongMessage>IAF token supplied is expired. </LongMessage>
+    <ErrorCode>21917053</ErrorCode>
+    <SeverityCode>Error</SeverityCode>
+    <ErrorClassification>RequestError</ErrorClassification>
+  </Errors>
+  <Version>1031</Version>
+  <Build>E1031_CORE_APISIGNIN_18531943_R1</Build>
+</GetUserResponse>
