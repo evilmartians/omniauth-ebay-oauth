@@ -2,7 +2,7 @@
 
 module OmniAuth
   module EbayOauth
-    # Mpas user information from Auth'n'auth eBay API to OmniAuth Auth Hash
+    # Maps user information from Auth'n'auth eBay API to OmniAuth Auth Hash
     # Schema version 1.0
     # https://github.com/omniauth/omniauth/wiki/Auth-Hash-Schema
     class UserInfo

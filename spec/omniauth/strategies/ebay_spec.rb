@@ -5,6 +5,14 @@ require 'spec_helper'
 RSpec.describe OmniAuth::Strategies::Ebay do
   subject { described_class.new(nil, options) }
 
+  describe '#callback_url' do
+    let(:callback_url) { 'https://api.com/callback' }
+    let(:options) { { callback_url: callback_url } }
+    it 'uses options callback_url' do
+      expect(subject.callback_url).to eql(callback_url)
+    end
+  end
+
   describe '#options' do
     let(:options) { {} }
     before { subject.setup_phase }
@@ -59,6 +67,27 @@ RSpec.describe OmniAuth::Strategies::Ebay do
         expect(subject.options.client_options.authorize_url)
           .to eq('https://signin.ebay.com/authorize')
       end
+    end
+  end
+
+  describe '#user_info' do
+    let(:access_token) { double(:access_token, token: :token) }
+    let(:options) { {} }
+    let(:user_info) { instance_double(OmniAuth::EbayOauth::UserInfo) }
+    let(:request) do
+      instance_double(OmniAuth::EbayOauth::UserInfoRequest, call: {})
+    end
+
+    before do
+      expect(subject).to receive(:access_token).and_return(access_token)
+      expect(OmniAuth::EbayOauth::UserInfoRequest)
+        .to receive(:new).and_return(request)
+      expect(OmniAuth::EbayOauth::UserInfo)
+        .to receive(:new).with({}).and_return(user_info)
+    end
+
+    it 'returns wrapped user info request' do
+      expect(subject.send(:user_info)).to eql(user_info)
     end
   end
 end

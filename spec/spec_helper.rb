@@ -2,6 +2,12 @@
 
 require 'bundler/setup'
 require 'webmock/rspec'
+require 'simplecov'
+
+SimpleCov.start do
+  add_filter 'spec/'
+  add_filter 'vendor/'
+end
 
 require 'omniauth-ebay-oauth'
 
