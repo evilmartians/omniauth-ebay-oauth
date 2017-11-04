@@ -3,7 +3,9 @@
 require 'spec_helper'
 
 RSpec.describe OmniAuth::EbayOauth::UserInfoRequest do
-  subject { described_class.new(token, user_info_endpoint: endpoint) }
+  subject do
+    described_class.new(token, user_info_endpoint: endpoint, read_timeout: 20)
+  end
 
   let(:endpoint) { 'https://api.com/endpoint' }
   let(:token)    { 'token' }

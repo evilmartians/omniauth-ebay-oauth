@@ -19,9 +19,10 @@ module OmniAuth
         'X-EBAY-API-CALL-NAME' => 'GetUser'
       }.freeze
 
-      def initialize(access_token, options)
+      def initialize(access_token, user_info_endpoint:, read_timeout:, **_args)
         @access_token = access_token
-        @url = URI(options.fetch(:user_info_endpoint))
+        @url = URI(user_info_endpoint)
+        @read_timeout = read_timeout
       end
 
       def call
@@ -53,6 +54,7 @@ module OmniAuth
 
       def http
         Net::HTTP.new(@url.host, @url.port).tap do |http|
+          http.read_timeout = @read_timeout
           http.use_ssl = true
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
         end

@@ -14,11 +14,11 @@ module OmniAuth
              authorize_url: 'https://signin.sandbox.ebay.com/authorize'
 
       option :name, :ebay
-      option :callback_url
       option :sandbox, true
+      option :callback_url
 
       option :authorize_options, %i[scope]
-      option :client_options, auth_scheme: :basic_auth
+      option :client_options, auth_scheme: :basic_auth, read_timeout: 60
 
       uid   { user_info.uid }
       info  { user_info.info }
