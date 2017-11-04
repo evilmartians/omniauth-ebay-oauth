@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Omniauth
-  module Ebay
+module OmniAuth
+  module EbayOauth
     # Receives user information from Auth'n'auth eBay API
     # https://developer.ebay.com/devzone/xml/docs/reference/ebay/GetUser.html
     class UserInfoRequest

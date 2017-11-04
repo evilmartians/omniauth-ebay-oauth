@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'omniauth/ebay'
 require 'webmock/rspec'
+
+require 'omniauth-ebay-oauth'
 
 OmniAuth.config.logger = Logger.new('/dev/null')
 

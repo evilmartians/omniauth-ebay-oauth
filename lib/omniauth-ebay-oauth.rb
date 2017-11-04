@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'omniauth-oauth2'
+
 require 'omniauth/ebay-oauth/version'
 
 require 'omniauth/ebay-oauth/errors'

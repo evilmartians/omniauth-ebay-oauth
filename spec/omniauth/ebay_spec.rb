@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-RSpec.describe Omniauth::Ebay::Oauth do
+RSpec.describe OmniAuth::EbayOauth do
   it 'has a version number' do
-    expect(Omniauth::Ebay::Oauth::VERSION).not_to be nil
+    expect(OmniAuth::EbayOauth::VERSION).not_to be nil
   end
 end

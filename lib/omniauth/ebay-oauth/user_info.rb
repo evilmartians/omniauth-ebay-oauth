@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Omniauth
-  module Ebay
+module OmniAuth
+  module EbayOauth
     # Mpas user information from Auth'n'auth eBay API to OmniAuth Auth Hash
     # Schema version 1.0
     # https://github.com/omniauth/omniauth/wiki/Auth-Hash-Schema
@@ -10,7 +10,7 @@ module Omniauth
         uid: %w[GetUserResponse User UserID],
         name: %w[GetUserResponse User RegistrationAddress Name],
         email: %w[GetUserResponse User Email]
-      }
+      }.freeze
 
       def initialize(body)
         @body = body
@@ -25,8 +25,7 @@ module Omniauth
           name: field(:name, required: true),
           email: field(:email),
           first_name: field(:name).split.first,
-          last_name: field(:name).split.last,
-
+          last_name: field(:name).split.last
         }
       end
 

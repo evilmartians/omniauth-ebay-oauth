@@ -4,3 +4,7 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
+
+Naming/FileName:
+  Exclude:
+    - 'lib/*.rb'

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'omniauth-oauth2'
-
 module OmniAuth
   module Strategies
     # OmniAuth strategy for eBay
@@ -47,7 +45,7 @@ module OmniAuth
 
       def user_info
         @user_info ||=
-          Omniauth::Ebay::UserInfo.new(Omniauth::Ebay::UserInfoRequest
+          OmniAuth::EbayOauth::UserInfo.new(OmniAuth::EbayOauth::UserInfoRequest
           .new(access_token.token, client.options).call)
       end
     end

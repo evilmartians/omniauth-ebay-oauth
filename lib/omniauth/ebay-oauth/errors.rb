@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Omniauth
-  module Ebay
+module OmniAuth
+  module EbayOauth
     class FailureResponseCode < StandardError; end
     class FailureResponseResult < StandardError; end
     class UnsupportedSchemaError < StandardError; end

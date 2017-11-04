@@ -2,23 +2,23 @@
 
 require 'spec_helper'
 
-RSpec.describe Omniauth::Ebay::UserInfo do
+RSpec.describe OmniAuth::EbayOauth::UserInfo do
   subject { described_class.new(parsed_body) }
 
   let(:xml_body) { File.read('spec/fixtures/result_success.xml') }
   let(:parsed_body) { MultiXml.parse(xml_body) }
 
-  context "when passed invalid schema" do
+  context 'when passed invalid schema' do
     let(:parsed_body) { {} }
 
     it "raises error if can't find required uid" do
       expect { subject.uid }
-        .to raise_error(Omniauth::Ebay::UnsupportedSchemaError)
+        .to raise_error(OmniAuth::EbayOauth::UnsupportedSchemaError)
     end
 
     it "raises error if can't find required name" do
       expect { subject.info }
-        .to raise_error(Omniauth::Ebay::UnsupportedSchemaError)
+        .to raise_error(OmniAuth::EbayOauth::UnsupportedSchemaError)
     end
   end
 
@@ -46,12 +46,12 @@ RSpec.describe Omniauth::Ebay::UserInfo do
       expect(subject.extra.keys).to eql %i[raw_info]
       expect(subject.extra[:raw_info].keys)
         .to eql %w[AboutMePage EIASToken Email FeedbackScore
-          UniqueNegativeFeedbackCount UniquePositiveFeedbackCount
-          PositiveFeedbackPercent FeedbackPrivate FeedbackRatingStar IDVerified
-          eBayGoodStanding NewUser RegistrationAddress RegistrationDate Site
-          Status UserID UserIDChanged VATStatus SellerInfo BusinessRole
-          eBayWikiReadOnly MotorsDealer UniqueNeutralFeedbackCount
-          EnterpriseSeller]
+                   UniqueNegativeFeedbackCount UniquePositiveFeedbackCount
+                   PositiveFeedbackPercent FeedbackPrivate FeedbackRatingStar
+                   IDVerified eBayGoodStanding NewUser RegistrationAddress
+                   RegistrationDate Site Status UserID UserIDChanged VATStatus
+                   SellerInfo BusinessRole eBayWikiReadOnly MotorsDealer
+                   UniqueNeutralFeedbackCount EnterpriseSeller]
     end
   end
 end

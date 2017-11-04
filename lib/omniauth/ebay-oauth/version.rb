@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-module Omniauth
-  module Ebay
-    module Oauth
-      VERSION = '0.1.0'
-    end
+module OmniAuth
+  module EbayOauth
+    VERSION = '0.1.0'
   end
 end

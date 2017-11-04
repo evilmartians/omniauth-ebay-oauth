@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Omniauth::Ebay::UserInfoRequest do
+RSpec.describe OmniAuth::EbayOauth::UserInfoRequest do
   subject { described_class.new(token, user_info_endpoint: endpoint) }
 
   let(:endpoint) { 'https://api.com/endpoint' }
@@ -13,14 +13,14 @@ RSpec.describe Omniauth::Ebay::UserInfoRequest do
   let(:failure_result)  { File.read('spec/fixtures/result_failure.xml') }
   let(:success_result)  { File.read('spec/fixtures/result_success.xml') }
 
-  before { stub_const('Omniauth::Ebay::UserInfoRequest::USER_REQUEST', body) }
+  before { stub_const("#{described_class}::USER_REQUEST", body) }
 
   it 'raises error if eBay API request returned non-successful code' do
     stub_request(:post, endpoint)
       .with(body: body, headers: request_headers)
       .to_return(status: 400, body: '', headers: {})
     expect { subject.call }
-      .to raise_error(Omniauth::Ebay::FailureResponseCode)
+      .to raise_error(OmniAuth::EbayOauth::FailureResponseCode)
   end
 
   it 'raises error if eBay API returned non-successful result' do
@@ -28,7 +28,7 @@ RSpec.describe Omniauth::Ebay::UserInfoRequest do
       .with(body: body, headers: request_headers)
       .to_return(status: 200, body: failure_result, headers: {})
     expect { subject.call }
-      .to raise_error(Omniauth::Ebay::FailureResponseResult)
+      .to raise_error(OmniAuth::EbayOauth::FailureResponseResult)
   end
 
   it 'returns parsed result from eBay in case of all is correct' do

@@ -6,7 +6,7 @@ require 'omniauth/ebay-oauth/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'omniauth-ebay-oauth'
-  spec.version       = Omniauth::Ebay::Oauth::VERSION
+  spec.version       = OmniAuth::EbayOauth::VERSION
   spec.authors       = ['Ignat Zakrevsky']
   spec.email         = ['iezakrevsky@gmail.com']
   spec.summary       = 'OmniAuth strategy for new eBay OAuth API'
