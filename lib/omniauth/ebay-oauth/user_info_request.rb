@@ -4,7 +4,7 @@ module Omniauth
   module Ebay
     # Receives user information from Auth'n'auth eBay API
     # https://developer.ebay.com/devzone/xml/docs/reference/ebay/GetUser.html
-    class UserInfo
+    class UserInfoRequest
       STATUS_PATH  = %w[GetUserResponse Ack].freeze
       SUCCESS_CODE = 'Success'
       USER_REQUEST = File.read(

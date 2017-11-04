@@ -46,7 +46,8 @@ module OmniAuth
 
       def user_info
         @user_info ||=
-          Omniauth::Ebay::UserInfo.new(access_token.token, client.options).call
+          Omniauth::Ebay::UserInfoRequest
+          .new(access_token.token, client.options).call
       end
     end
   end
