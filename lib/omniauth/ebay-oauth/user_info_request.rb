@@ -28,7 +28,7 @@ module OmniAuth
       def call
         MultiXml.parse(
           http
-            .request(request)
+            .request(ebay_request)
             .tap(&ensure_success_code)
             .read_body
         ).tap(&ensure_success_result)
@@ -60,10 +60,10 @@ module OmniAuth
         end
       end
 
-      def request
+      def ebay_request
         Net::HTTP::Post.new(@url).tap do |request|
-          BASIC_HEADERS.each { |header, value| request[header] = value }
-          request[TOKEN_HEADER] = @access_token
+          BASIC_HEADERS.merge(TOKEN_HEADER => @access_token)
+                       .each { |header, value| request[header] = value }
           request.body = USER_REQUEST
         end
       end
