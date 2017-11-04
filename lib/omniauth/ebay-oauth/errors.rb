@@ -4,5 +4,6 @@ module Omniauth
   module Ebay
     class FailureResponseCode < StandardError; end
     class FailureResponseResult < StandardError; end
+    class UnsupportedSchemaError < StandardError; end
   end
 end

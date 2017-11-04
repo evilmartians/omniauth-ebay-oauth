@@ -22,8 +22,9 @@ module OmniAuth
       option :authorize_options, %i[scope]
       option :client_options, auth_scheme: :basic_auth
 
-      uid  { user_info.dig('GetUserResponse', 'User', 'Email') }
-      info { user_info.dig('GetUserResponse', 'User', 'SellerInfo') }
+      uid   { user_info.uid }
+      info  { user_info.info }
+      extra { user_info.extra }
 
       def setup_phase
         options.client_options.merge!(environment_urls)
@@ -46,8 +47,8 @@ module OmniAuth
 
       def user_info
         @user_info ||=
-          Omniauth::Ebay::UserInfoRequest
-          .new(access_token.token, client.options).call
+          Omniauth::Ebay::UserInfo.new(Omniauth::Ebay::UserInfoRequest
+          .new(access_token.token, client.options).call)
       end
     end
   end

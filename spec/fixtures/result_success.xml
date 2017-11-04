@@ -17,6 +17,17 @@
     <IDVerified>false</IDVerified>
     <eBayGoodStanding>true</eBayGoodStanding>
     <NewUser>true</NewUser>
+    <RegistrationAddress>
+      <Name>Oleg Petrov</Name>
+      <Street>Ap #867-859 Sit Rd.</Street>
+      <Street1>Sit Rd</Street1>
+      <Street2>#867-859</Street2>
+      <CityName>Azusa</CityName>
+      <Country>US</Country>
+      <CountryName>United States</CountryName>
+      <Phone>7931516230</Phone>
+      <PostalCode>91702</PostalCode>
+    </RegistrationAddress>
     <RegistrationDate>2017-11-01T20:21:09.000Z</RegistrationDate>
     <Site>US</Site>
     <Status>Confirmed</Status>

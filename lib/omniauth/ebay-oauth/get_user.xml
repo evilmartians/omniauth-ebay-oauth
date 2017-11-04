@@ -2,4 +2,5 @@
 <GetUserRequest xmlns="urn:ebay:apis:eBLBaseComponents">
   <ErrorLanguage>en_US</ErrorLanguage>
   <WarningLevel>High</WarningLevel>
+  <DetailLevel>ReturnAll</DetailLevel>
 </GetUserRequest>
