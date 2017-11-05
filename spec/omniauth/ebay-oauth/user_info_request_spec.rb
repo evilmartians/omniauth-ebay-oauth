@@ -4,7 +4,8 @@ require 'spec_helper'
 
 RSpec.describe OmniAuth::EbayOauth::UserInfoRequest do
   subject do
-    described_class.new(token, user_info_endpoint: endpoint, read_timeout: 20)
+    described_class.new(token, user_info_endpoint: endpoint, read_timeout: 20,
+                               request: body)
   end
 
   let(:endpoint) { 'https://api.com/endpoint' }
@@ -14,8 +15,6 @@ RSpec.describe OmniAuth::EbayOauth::UserInfoRequest do
   let(:request_headers) { YAML.load_file('spec/fixtures/request_headers.yml') }
   let(:failure_result)  { File.read('spec/fixtures/result_failure.xml') }
   let(:success_result)  { File.read('spec/fixtures/result_success.xml') }
-
-  before { stub_const("#{described_class}::USER_REQUEST", body) }
 
   it 'raises error if eBay API request returned non-successful code' do
     stub_request(:post, endpoint)

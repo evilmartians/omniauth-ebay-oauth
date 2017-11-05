@@ -19,10 +19,12 @@ module OmniAuth
         'X-EBAY-API-CALL-NAME' => 'GetUser'
       }.freeze
 
-      def initialize(access_token, user_info_endpoint:, read_timeout:, **_args)
+      def initialize(access_token, request: USER_REQUEST,
+                     user_info_endpoint:, read_timeout:, **_args)
         @access_token = access_token
         @url = URI(user_info_endpoint)
         @read_timeout = read_timeout
+        @request = request
       end
 
       def call
@@ -64,7 +66,7 @@ module OmniAuth
         Net::HTTP::Post.new(@url).tap do |request|
           BASIC_HEADERS.merge(TOKEN_HEADER => @access_token)
                        .each { |header, value| request[header] = value }
-          request.body = USER_REQUEST
+          request.body = @request
         end
       end
     end
