@@ -9,8 +9,8 @@ module OmniAuth
     class ResponseResultError < StandardError; end
 
     class UserInfoRetriever # :nodoc:
-      API_COMPATIBILITY_LEVEL = '1031'
-      TOKEN_HEADER = 'X-EBAY-API-IAF-TOKEN'
+      API_COMPATIBILITY_LEVEL = '1031'.freeze
+      TOKEN_HEADER = 'X-EBAY-API-IAF-TOKEN'.freeze
 
       USER_INFO_REQUEST_BODY = %(
         <?xml version="1.0" encoding="utf-8"?>
@@ -19,7 +19,7 @@ module OmniAuth
           <ErrorLanguage>en_US</ErrorLanguage>
           <WarningLevel>High</WarningLevel>
         </GetUserRequest>
-      )
+      ).freeze
 
       USER_INFO_HEADERS = {
         'X-EBAY-API-SITEID'              => '0',
@@ -32,19 +32,19 @@ module OmniAuth
         @url = URI(endpoint)
       end
 
-      def get_info
-        response = get_response
+      def info
+        response = xml_response
         raise ResponseCodeError, response unless (200..299).cover?(response.code.to_i)
 
         body = MultiXml.parse(response.read_body)
-        raise ResponseResultError, body unless body["GetUserResponse"]["Ack"] == 'Success'
+        raise ResponseResultError, body unless body['GetUserResponse']['Ack'] == 'Success'
 
         body
       end
 
       private
 
-      def get_response
+      def xml_response
         request = Net::HTTP::Post.new(@url.path,
                                       { TOKEN_HEADER => @token }.merge!(USER_INFO_HEADERS))
         http = Net::HTTP.new(@url.host, @url.port).tap { |h| h.use_ssl = true }

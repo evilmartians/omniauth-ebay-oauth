@@ -13,10 +13,10 @@ RSpec.describe OmniAuth::Strategies::Ebay do
     let(:token) { 'my_access_token' }
     let(:token_data) do
       {
-        "expires_in"                => 7200,
-        "refresh_token"             => "my_refresh_token",
-        "refresh_token_expires_in"  => 47_304_000,
-        "token_type"                => "User Access Token"
+        'expires_in'                => 7200,
+        'refresh_token'             => 'my_refresh_token',
+        'refresh_token_expires_in'  => 47_304_000,
+        'token_type'                => 'User Access Token'
       }
     end
     let(:access_token) { OAuth2::AccessToken.new(nil, token, token_data) }
@@ -25,7 +25,7 @@ RSpec.describe OmniAuth::Strategies::Ebay do
 
     it 'returns hash with refresh token expiration time', :aggregate_failures do
       expect(subject.credentials).to have_key('refresh_token_expires_in')
-      expect(subject.credentials["refresh_token_expires_in"]).to eq 47_304_000
+      expect(subject.credentials['refresh_token_expires_in']).to eq 47_304_000
     end
   end
 
@@ -38,9 +38,9 @@ RSpec.describe OmniAuth::Strategies::Ebay do
   describe '#raw_info' do
     let(:user_info) do
       {
-        "GetUserResponse" => {
-          "User" => {
-            "Name" => 'TestUser'
+        'GetUserResponse' => {
+          'User' => {
+            'Name' => 'TestUser'
           }
         }
       }
@@ -49,7 +49,7 @@ RSpec.describe OmniAuth::Strategies::Ebay do
     before do
       allow(OmniAuth::Ebay::UserInfoRetriever)
         .to receive(:new)
-        .and_return(instance_double(OmniAuth::Ebay::UserInfoRetriever, get_info: user_info))
+        .and_return(instance_double(OmniAuth::Ebay::UserInfoRetriever, info: user_info))
       allow(subject).to receive(:access_token)
         .and_return(instance_double(OAuth2::AccessToken, token: 'my_access_token'))
     end

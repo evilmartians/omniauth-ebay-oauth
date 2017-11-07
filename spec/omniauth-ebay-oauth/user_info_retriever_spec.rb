@@ -17,25 +17,25 @@ RSpec.describe OmniAuth::Ebay::UserInfoRetriever do
     described_class.new(token, endpoint)
   end
 
-  describe '#get_info' do
+  describe '#info' do
     context 'when response is successful and has successful status' do
       it 'returns user info hash', :aggregate_failures do
-        get_successful_response
-        expect(subject.get_info['GetUserResponse']).to have_key 'User'
+        stub_successful_response
+        expect(subject.info['GetUserResponse']).to have_key 'User'
       end
     end
 
     context 'when response is not successful' do
       it 'raises ResponseCodeError' do
-        get_response_with_bad_code
-        expect { subject.get_info }.to raise_error(OmniAuth::Ebay::ResponseCodeError)
+        stub_response_with_bad_code
+        expect { subject.info }.to raise_error(OmniAuth::Ebay::ResponseCodeError)
       end
     end
 
     context 'when response is successful but has failure status' do
       it 'raises ResponseResultError' do
-        get_response_with_bad_status
-        expect { subject.get_info }.to raise_error(OmniAuth::Ebay::ResponseResultError)
+        stub_response_with_bad_status
+        expect { subject.info }.to raise_error(OmniAuth::Ebay::ResponseResultError)
       end
     end
   end

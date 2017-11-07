@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 module UserInfoHelper # :nodoc:
-  def get_response_with_bad_code
+  def stub_response_with_bad_code
     stub_request(:post, endpoint)
       .with(body: request_body, headers: headers)
       .to_return(status: 400, body: '', headers: {})
   end
 
-  def get_response_with_bad_status
+  def stub_response_with_bad_status
     stub_request(:post, endpoint)
       .with(body: request_body, headers: headers)
       .to_return(status: 200, body: failure_body, headers: {})
   end
 
-  def get_successful_response
+  def stub_successful_response
     stub_request(:post, endpoint)
       .with(body: request_body, headers: headers)
       .to_return(status: 200, body: successful_body, headers: {})

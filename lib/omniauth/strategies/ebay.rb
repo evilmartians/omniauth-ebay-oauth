@@ -41,13 +41,13 @@ module OmniAuth
           OmniAuth::Ebay::UserInfoRetriever.new(
             access_token.token,
             options.client_options[:user_info_url]
-          ).get_info
+          ).info
         )
       end
 
       def setup_phase
         options.client_options.merge!(options.sandbox ? SANDBOX_URLS : PRODUCTION_URLS)
-        options[:scope] = OmniAuth::Ebay::ApiScopeHandler.new(options[:scope]).get_scopes
+        options[:scope] = OmniAuth::Ebay::ApiScopeHandler.new(options[:scope]).scopes_list
         super
       end
     end

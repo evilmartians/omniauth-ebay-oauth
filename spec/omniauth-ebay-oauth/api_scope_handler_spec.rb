@@ -3,9 +3,9 @@
 require 'spec_helper'
 
 RSpec.describe OmniAuth::Ebay::ApiScopeHandler do
-  describe '#get_scopes' do
+  describe '#scopes_list' do
     subject do
-      described_class.new(scopes).get_scopes
+      described_class.new(scopes).scopes_list
     end
     context 'when scopes are empty' do
       let(:scopes) { '' }

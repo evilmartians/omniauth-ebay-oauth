@@ -1,0 +1,22 @@
+AllCops:
+  DisplayCopNames: true
+  StyleGuideCopsOnly: false
+  TargetRubyVersion: 2.2
+
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/LineLength:
+  Max: 100
+  IgnoredPatterns: ['\A#']
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Naming/Filename:
+  Exclude:
+    - 'spec/**/*.rb'
