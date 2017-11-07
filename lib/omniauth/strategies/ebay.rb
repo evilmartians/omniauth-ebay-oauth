@@ -25,6 +25,7 @@ module OmniAuth
       extra { user_info.extra }
 
       def setup_phase
+        options.scope = preprocessed_scopes
         options.client_options.merge!(environment_urls)
         super
       end
@@ -34,6 +35,10 @@ module OmniAuth
       end
 
       private
+
+      def preprocessed_scopes
+        Array(options.scope).join(' ')
+      end
 
       def environment_urls
         if options.sandbox

@@ -19,7 +19,8 @@ Then `bundle install`.
 
 ```ruby
 use OmniAuth::Builder do
-  provider :ebay, CLIENT_ID, CLIENT_SECRET, callback_url: RU_NAME
+  provider :ebay, CLIENT_ID, CLIENT_SECRET, callback_url: RU_NAME,
+    sandbox: false, scope: 'https://api.ebay.com/oauth/api_scope' # redefining additional default options
 end
 ```
 
@@ -29,7 +30,7 @@ Required options:
 
 Additional options:
   - __sandbox__ - Are you running your application in [sandbox mode](<https://developer.ebay.com/api-docs/static/sandbox-landing.html>), default __`true`__.
-  - __scope__ - A list of [OAuth scopes](<https://developer.ebay.com/api-docs/static/oauth-details.html#scopes>) that provide access to the interfaces you call.
+  - __scope__ - A list of [OAuth scopes](<https://developer.ebay.com/api-docs/static/oauth-details.html#scopes>) that provide access to the interfaces you call, default: __`[]`__. If you want change scopes you could pass it as string or as array of scopes like so: `['https://api.ebay.com/oauth/api_scope/sell.marketing.readonly', 'https://api.ebay.com/oauth/api_scope/sell.account.readonly']`
   - __read_timeout__ - Number of seconds to wait for one block to be read for Auth'n'auth eBay API requests, default is 60.
   - \+ all [OmniAuth](<https://github.com/omniauth/omniauth>) supported options, like: `callback_path`, `provider_ignores_state` and so on.
 

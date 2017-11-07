@@ -31,6 +31,32 @@ RSpec.describe OmniAuth::Strategies::Ebay do
       end
     end
 
+    context "when scopes aren't passed" do
+      let(:options) { {} }
+
+      it 'uses empty string as scope' do
+        expect(subject.options.scope).to eql ''
+      end
+    end
+
+    context 'when scopes passed' do
+      context 'as array' do
+        let(:options) { { scope: %w[array like scopes] } }
+
+        it 'concatenates passed scopes with space' do
+          expect(subject.options.scope).to eql 'array like scopes'
+        end
+      end
+
+      context 'as string' do
+        let(:options) { { scope: 'scope as string' } }
+
+        it 'keeps scopes the same' do
+          expect(subject.options.scope).to eql 'scope as string'
+        end
+      end
+    end
+
     context 'sandbox mode' do
       let(:options) { { sandbox: true } }
 
