@@ -52,7 +52,6 @@ module OmniAuth
         Net::HTTP.new(@url.host, @url.port).tap do |http|
           http.read_timeout = @read_timeout
           http.use_ssl = true
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
         end
       end
 
