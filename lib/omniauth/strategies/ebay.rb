@@ -20,9 +20,10 @@ module OmniAuth
       option :authorize_options, %i[scope]
       option :client_options, auth_scheme: :basic_auth, read_timeout: 60
 
-      uid   { user_info.uid }
-      info  { user_info.info }
-      extra { user_info.extra }
+      uid          { user_info.uid }
+      info         { user_info.info }
+      extra        { user_info.extra }
+      credentials  { user_credentials }
 
       def setup_phase
         options.scope = preprocessed_scopes
@@ -35,6 +36,13 @@ module OmniAuth
       end
 
       private
+
+      def user_credentials
+        OmniAuth::Strategies::OAuth2.credentials_stack(self).first.merge(
+          'refresh_token_expires_at' =>
+            access_token['refresh_token_expires_in'].to_i + Time.now.to_i
+        )
+      end
 
       def preprocessed_scopes
         Array(options.scope).join(' ')

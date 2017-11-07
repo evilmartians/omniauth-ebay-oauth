@@ -15,6 +15,7 @@ RSpec.describe OmniAuth::Strategies::Ebay do
 
   describe '#options' do
     let(:options) { {} }
+
     before { subject.setup_phase }
 
     it 'default mode is sandbox' do
@@ -97,7 +98,7 @@ RSpec.describe OmniAuth::Strategies::Ebay do
   end
 
   describe '#user_info' do
-    let(:access_token) { double(:access_token, token: :token) }
+    let(:access_token) { instance_double(OAuth2::AccessToken, token: :token) }
     let(:options) { {} }
     let(:user_info) { instance_double(OmniAuth::EbayOauth::UserInfo) }
     let(:request) do
@@ -114,6 +115,32 @@ RSpec.describe OmniAuth::Strategies::Ebay do
 
     it 'returns wrapped user info request' do
       expect(subject.send(:user_info)).to eql(user_info)
+    end
+  end
+
+  describe '#credentials' do
+    let(:access_token) { OAuth2::AccessToken.new(client, token, opts) }
+    let(:options) { {} }
+
+    let(:client) { instance_double(OAuth2::Client) }
+    let(:token)  { 'v^1.1#i^1#f^0#I^3#r^0#p^3#t^H4sIAAAAAAAAAOlongstringtoken' }
+    let(:opts) do
+      {
+        'expires_in' => 7200,
+        'refresh_token' => refresh_token,
+        'refresh_token_expires_in' => expiration_time,
+        'token_type' => 'User Access Token'
+      }
+    end
+
+    let(:refresh_token) { 'v^1.1#i^1#r^1#f^0#I^3#p^3#t^Urefreshtoken=' }
+    let(:expiration_time) { 47_304_000 }
+
+    before { allow(subject).to receive(:access_token).and_return(access_token) }
+
+    it 'adds refresh_token_expires_at for default OAuth2 credentials hash' do
+      expect(subject.credentials['refresh_token_expires_at'])
+        .to be >= Time.now.to_i + expiration_time
     end
   end
 end
