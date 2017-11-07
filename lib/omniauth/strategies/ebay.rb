@@ -1,5 +1,4 @@
 require 'omniauth-oauth2'
-require_relative '../../ebay_api'
 
 module OmniAuth
   module Strategies
