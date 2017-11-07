@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 RSpec.describe OmniAuth::Strategies::Ebay do
   subject { OmniAuth::Strategies::Ebay.new(nil, runame: 'runame') }
