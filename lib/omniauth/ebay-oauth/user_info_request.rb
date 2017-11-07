@@ -31,27 +31,21 @@ module OmniAuth
         MultiXml.parse(
           http
             .request(ebay_request)
-            .tap(&ensure_success_code)
+            .tap(&method(:ensure_success_code))
             .read_body
-        ).tap(&ensure_success_result)
+        ).tap(&method(:ensure_success_result))
       end
 
       private
 
-      def ensure_success_code
-        lambda { |response|
-          unless (200..299).cover?(response.code.to_i)
-            raise FailureResponseCode, response
-          end
-        }
+      def ensure_success_code(response)
+        return if (200..299).cover?(response.code.to_i)
+        raise FailureResponseCode, response
       end
 
-      def ensure_success_result
-        lambda { |body|
-          unless body.dig(*STATUS_PATH) == SUCCESS_CODE
-            raise FailureResponseResult, body
-          end
-        }
+      def ensure_success_result(body)
+        return if body.dig(*STATUS_PATH) == SUCCESS_CODE
+        raise FailureResponseResult, body
       end
 
       def http
