@@ -38,7 +38,7 @@ module OmniAuth
       private
 
       def user_credentials
-        OmniAuth::Strategies::OAuth2.credentials_stack(self).first.merge(
+        self.class.superclass.credentials_stack(self).first.merge(
           'refresh_token_expires_at' =>
             access_token['refresh_token_expires_in'].to_i + Time.now.to_i
         )
