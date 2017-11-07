@@ -1,4 +1,5 @@
 require 'omniauth-oauth2'
+require_relative '../../ebay_api'
 
 module OmniAuth
   module Strategies
@@ -27,24 +28,28 @@ module OmniAuth
 
       info do
         {
-          ebay_id: raw_info['UserID'],
-          email: raw_info['Email'],
-          ebay_token: @auth_token,
-          full_name: raw_info["RegistrationAddress"] && raw_info["RegistrationAddress"]["Name"],
-          country: raw_info["RegistrationAddress"] && raw_info["RegistrationAddress"]["Country"],
-          phone: raw_info["RegistrationAddress"] && raw_info["RegistrationAddress"]["Phone"]
+          :nickname => raw_info['UserID'],
+          :email => raw_info['Email'],
+          :full_name => raw_info['RegistrationAddress'] && raw_info['RegistrationAddress']['Name'],
+          :country => raw_info['RegistrationAddress'] && raw_info['RegistrationAddress']['Country'],
+          :phone => raw_info['RegistrationAddress'] && raw_info['RegistrationAddress']['Phone']
         }
       end
 
       extra do
         {
-          'raw_info' => raw_info
+          :raw_info => raw_info
+        }
+      end
+
+      credentials do
+        {
+          :refresh_token_expires_in => access_token['refresh_token_expires_in'].to_i
         }
       end
 
       def raw_info
-        @user_info ||= get_user_info
-        @user_info
+        @raw_info ||= user_info
       end
     end
   end

@@ -5,9 +5,8 @@ module EbayAPI
   class EbayApiError < StandardError
     attr_accessor :request, :response
 
-    def initialize(message = nil, request = nil, response = nil)
+    def initialize(message = nil, response = nil)
       super(message)
-      @request = request
       @response = response
     end
   end
@@ -17,56 +16,55 @@ module EbayAPI
   X_EBAY_API_REQUEST_CONTENT_TYPE = 'text/xml'.freeze
   X_EBAY_API_COMPATIBILITY_LEVEL = '967'.freeze
   X_EBAY_API_CALL_NAME = 'GetUser'.freeze
+  GET_USER_REQUEST = File.open(File.join(File.dirname(__FILE__), 'requests', 'get_user.xml'), 'r', &:read)
 
   def sandbox?
     options.environment == :sandbox
   end
 
-  def api_url
-    return EBAY_SANDBOX_XML_API_URL if sandbox?
-    EBAY_PRODUCTION_XML_API_URL
+  def url
+    api_url = sandbox? ? EBAY_SANDBOX_XML_API_URL : EBAY_PRODUCTION_XML_API_URL
+    URI.parse(api_url)
   end
 
-  def get_user_info
-    request = %(
-      <?xml version="1.0" encoding="utf-8"?>
-      <GetUserRequest xmlns="urn:ebay:apis:eBLBaseComponents">
-	      <ErrorLanguage>en_US</ErrorLanguage>
-	      <WarningLevel>High</WarningLevel>
-      </GetUserRequest>
-      )
-
-    parsed_response, response = api(X_EBAY_API_CALL_NAME, request)
+  def user_info
+    parsed_response, response = api_get_user
     user = parsed_response && parsed_response['GetUserResponse'] &&
            parsed_response['GetUserResponse']['User']
 
-    unless user
-      raise EbayApiError.new('Failed to retrieve user info', request, response)
-    end
+    raise EbayApiError.new('Failed to retrieve user info', response) unless user
 
     user
   end
 
   protected
 
-  def api(call_name, request)
-    headers = ebay_request_headers(call_name, request.length.to_s)
-    url = URI.parse(api_url)
-    req = Net::HTTP::Post.new(url.path, headers)
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    response = http.start { |h| h.request(req, request) }.body
-    [MultiXml.parse(response), response]
+  def api_get_user
+    response = http.request(ebay_request)
+    [MultiXml.parse(response.body), response]
   end
 
-  def ebay_request_headers(call_name, request_length)
+  def http
+    Net::HTTP.new(url.host, url.port).tap do |http|
+      http.use_ssl = true
+    end
+  end
+
+  def ebay_request
+    headers = ebay_request_headers
+    Net::HTTP::Post.new(url.path, headers).tap do |request|
+      request.body = GET_USER_REQUEST
+    end
+  end
+
+  def ebay_request_headers
     {
-      'X-EBAY-API-CALL-NAME' => call_name,
+      'X-EBAY-API-CALL-NAME' => X_EBAY_API_CALL_NAME,
       'X-EBAY-API-COMPATIBILITY-LEVEL' => X_EBAY_API_COMPATIBILITY_LEVEL,
       'X-EBAY-API-IAF-TOKEN' => access_token.token,
       'X-EBAY-API-SITEID' => options.siteid.to_s,
       'Content-Type' => X_EBAY_API_REQUEST_CONTENT_TYPE,
-      'Content-Length' => request_length
+      'Content-Length' => GET_USER_REQUEST.length.to_s
     }
   end
 end

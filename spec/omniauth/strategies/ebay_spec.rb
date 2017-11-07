@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 RSpec.describe OmniAuth::Strategies::Ebay do
   subject { OmniAuth::Strategies::Ebay.new(nil, runame: 'runame') }
@@ -43,9 +44,8 @@ RSpec.describe OmniAuth::Strategies::Ebay do
     end
 
     context 'and therefore has all the necessary fields' do
-      it { expect(subject.info).to have_key :ebay_id }
+      it { expect(subject.info).to have_key :nickname }
       it { expect(subject.info).to have_key :email }
-      it { expect(subject.info).to have_key :ebay_token }
       it { expect(subject.info).to have_key :full_name }
       it { expect(subject.info).to have_key :country }
       it { expect(subject.info).to have_key :phone }
@@ -57,6 +57,16 @@ RSpec.describe OmniAuth::Strategies::Ebay do
       allow(subject).to receive(:raw_info) { { foo: 'bar' } }
     end
 
-    it { expect(subject.extra['raw_info']).to eq(foo: 'bar') }
+    it { expect(subject.extra[:raw_info]).to eq(foo: 'bar') }
+  end
+
+  describe '#credentials' do
+    before :each do
+      @access_token = double('oauth2 access token').as_null_object
+      allow(subject).to receive(:access_token).and_return(@access_token)
+      allow(@access_token).to receive(:[]).and_return(946_688_400)
+    end
+
+    it { expect(subject.credentials[:refresh_token_expires_in]).to eq(946_688_400) }
   end
 end

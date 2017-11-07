@@ -40,21 +40,21 @@ RSpec.describe EbayAPI do
 
     context 'good response' do
       before :each do
-        allow(subject).to receive(:api) { [good_parsed_response, good_response] }
+        allow(subject).to receive(:api_get_user) { [good_parsed_response, good_response] }
       end
 
       it 'should return user info for a good response' do
-        expect(subject.get_user_info).to eq(good_parsed_response['GetUserResponse']['User'])
+        expect(subject.user_info).to eq(good_parsed_response['GetUserResponse']['User'])
       end
     end
 
     context 'bad response' do
       before :each do
-        allow(subject).to receive(:api) { [bad_parsed_response, bad_response] }
+        allow(subject).to receive(:api_get_user) { [bad_parsed_response, bad_response] }
       end
 
       it 'should raise EbayAPIError for a bad response' do
-        expect { subject.get_user_info }.to raise_error EbayAPI::EbayApiError
+        expect { subject.user_info }.to raise_error EbayAPI::EbayApiError
       end
     end
   end
