@@ -23,8 +23,10 @@ RSpec.describe OmniAuth::EbayOauth::UserInfo do
   end
 
   describe '#uid' do
+    let(:uid) { 'nY+sHZ2PrKoij6wVnY+sEZ2PrA2dj6ACmYChC5WDoQydj6x9nY+seQ==' }
+
     it 'returns user unique identification' do
-      expect(subject.uid).to eql 'olegpetrov'
+      expect(subject.uid).to eql uid
     end
   end
 
@@ -33,6 +35,7 @@ RSpec.describe OmniAuth::EbayOauth::UserInfo do
       {
         name: 'Oleg Petrov',
         email: 'olegpetrov@mail.com',
+        nickname: 'olegpetrov',
         first_name: 'Oleg',
         last_name: 'Petrov'
       }.each do |key, value|

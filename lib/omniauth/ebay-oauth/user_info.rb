@@ -7,8 +7,9 @@ module OmniAuth
     # https://github.com/omniauth/omniauth/wiki/Auth-Hash-Schema
     class UserInfo
       MAPPING = {
-        uid: %w[GetUserResponse User UserID],
+        uid: %w[GetUserResponse User EIASToken],
         name: %w[GetUserResponse User RegistrationAddress Name],
+        nickname: %w[GetUserResponse User UserID],
         email: %w[GetUserResponse User Email]
       }.freeze
 
@@ -24,6 +25,7 @@ module OmniAuth
         {
           name: field(:name, required: true),
           email: field(:email),
+          nickname: field(:nickname),
           first_name: field(:name).split.first,
           last_name: field(:name).split.last
         }
