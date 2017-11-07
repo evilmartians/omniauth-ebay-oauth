@@ -17,8 +17,13 @@ module OmniAuth
       option :client_secret, nil
       option :runame, nil
       option :environment, :production
-      option :scope, 'https://api.ebay.com/oauth/api_scope'
       option :siteid, 0
+
+      def authorize_params
+        super.tap do |params|
+          params[:scope] = get_scope(params)
+        end
+      end
 
       def callback_url
         options['runame']

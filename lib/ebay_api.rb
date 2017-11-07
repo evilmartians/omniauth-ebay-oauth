@@ -13,6 +13,9 @@ module EbayAPI
 
   EBAY_PRODUCTION_XML_API_URL = 'https://api.ebay.com/ws/api.dll'.freeze
   EBAY_SANDBOX_XML_API_URL = 'https://api.sandbox.ebay.com/ws/api.dll'.freeze
+
+  BASE_SCOPE_URL = 'https://api.ebay.com/oauth/api_scope'
+
   X_EBAY_API_REQUEST_CONTENT_TYPE = 'text/xml'.freeze
   X_EBAY_API_COMPATIBILITY_LEVEL = '967'.freeze
   X_EBAY_API_CALL_NAME = 'GetUser'.freeze
@@ -25,6 +28,13 @@ module EbayAPI
   def url
     api_url = sandbox? ? EBAY_SANDBOX_XML_API_URL : EBAY_PRODUCTION_XML_API_URL
     URI.parse(api_url)
+  end
+
+  def get_scope(params)
+    raw_scope = params[:scope] || BASE_SCOPE_URL
+    scope_list = raw_scope.split(' ').map { |item| item.split(',') }.flatten
+    scope_list.map! { |s| s =~ %r{^https?://} ? s : "#{BASE_SCOPE_URL}/#{s}" }
+    scope_list.join(' ')
   end
 
   def user_info
