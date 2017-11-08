@@ -51,6 +51,34 @@ use OmniAuth::Builder do
 end
 ```
 
+### Auth Hash Schema
+
+```ruby
+{
+    provider: "ebay",
+    uid: "nY+sHZ2PrBmdj6wVnY+s75FEZ2PrA2dj6wFk4GnC5iFoA6dj6x9nY+seQ==",
+    info: {
+        username: "john_appleseed",
+        first_name: "John",
+        last_name: "Appleseed",
+        email: "john_appleseed@gmail.com",
+        phone: "1000085478",
+        country: "US",
+        name: "John Appleseed"
+    },
+    credentials: {
+        token: "v^1.1#i^1#f^0#I^3#r^...very long token here",
+        refresh_token: "v^1.1#i^1#f^0#I^3#r^1#p^3#t^Ul4xMF8xO...shorter one",
+        expires_at: 1510131176,
+        expires: true,
+        refresh_token_expires_in: 47304000
+    },
+    extra: {
+      # A lot of Ebay info about user. 
+    }
+}
+```
+
 ## Development
 
 To run the tests:
