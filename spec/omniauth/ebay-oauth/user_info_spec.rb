@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'helpers/user_info_helper'
 
 RSpec.describe OmniAuth::EbayOauth::UserInfo do
-  include UserInfoHelper
+  let(:successful_body) { File.read('spec/fixtures/successful_body.xml') }
 
   subject { described_class.new(MultiXml.parse(successful_body)) }
 
@@ -17,7 +16,7 @@ RSpec.describe OmniAuth::EbayOauth::UserInfo do
   describe '#info' do
     let(:user_details) do
       {
-        username:   'john_appleseed',
+        nickname:   'john_appleseed',
         first_name: 'John',
         last_name:  'Appleseed',
         email:      'john_appleseed@gmail.com',
@@ -32,7 +31,7 @@ RSpec.describe OmniAuth::EbayOauth::UserInfo do
 
   describe '#extra' do
     it 'returns all user data' do
-      expect(subject.extra).to eq subject.instance_variable_get('@info')
+      expect(subject.extra).to eq(raw_info: subject.instance_variable_get('@info'))
     end
   end
 end

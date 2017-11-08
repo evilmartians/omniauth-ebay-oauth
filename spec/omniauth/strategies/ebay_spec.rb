@@ -21,11 +21,14 @@ RSpec.describe OmniAuth::Strategies::Ebay do
     end
     let(:access_token) { OAuth2::AccessToken.new(nil, token, token_data) }
 
-    before { allow(subject).to receive(:access_token).and_return(access_token) }
+    before do
+      allow(subject).to receive(:access_token).and_return(access_token)
+      allow(Time).to receive(:now).and_return(Time.gm(2017, 11, 8))
+    end
 
     it 'returns hash with refresh token expiration time', :aggregate_failures do
-      expect(subject.credentials).to have_key('refresh_token_expires_in')
-      expect(subject.credentials['refresh_token_expires_in']).to eq 47_304_000
+      expect(subject.credentials).to have_key('refresh_token_expires_at')
+      expect(subject.credentials['refresh_token_expires_at']).to eq 1_557_403_200
     end
   end
 
@@ -94,7 +97,7 @@ RSpec.describe OmniAuth::Strategies::Ebay do
     end
 
     context 'when scope is provided' do
-      let(:options) { { scope: 'buy.order.readonly | sell.marketing' } }
+      let(:options) { { scope: ['buy.order.readonly', 'sell.marketing'] } }
       it 'returns correct scopes list' do
         expect(subject.options[:scope])
           .to eq(

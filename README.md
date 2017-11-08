@@ -40,14 +40,21 @@ end
 ### Using Ebay OAuth Scopes
 
 If you totally omit the `scope` option then by default your token will be assigned to public one
-'https://api.ebay.com/oauth/api_scope'
+`https://api.ebay.com/oauth/api_scope`
 
-To get access to the specific scopes pass the `scope` option with delimited list of desired scope
-names:
+To get access to the certain scope pass the `scope` option with scope name:
 
 ```ruby
 use OmniAuth::Builder do
-  provider :ebay, APP_ID, CERT_ID, RUNAME, scope: 'buy.order.readonly | sell.marketing'
+  provider :ebay, APP_ID, CERT_ID, RUNAME, scope: 'sell.marketing'
+end
+```
+
+To get access to the several scopes pass the `scope` option with array of desired scopes names:
+
+```ruby
+use OmniAuth::Builder do
+  provider :ebay, APP_ID, CERT_ID, RUNAME, scope: ['buy.order.readonly', 'sell.marketing']
 end
 ```
 
@@ -58,7 +65,7 @@ end
     provider: "ebay",
     uid: "nY+sHZ2PrBmdj6wVnY+s75FEZ2PrA2dj6wFk4GnC5iFoA6dj6x9nY+seQ==",
     info: {
-        username: "john_appleseed",
+        nickname: "john_appleseed",
         first_name: "John",
         last_name: "Appleseed",
         email: "john_appleseed@gmail.com",
@@ -71,10 +78,12 @@ end
         refresh_token: "v^1.1#i^1#f^0#I^3#r^1#p^3#t^Ul4xMF8xO...shorter one",
         expires_at: 1510131176,
         expires: true,
-        refresh_token_expires_in: 47304000
+        refresh_token_expires_at: 1557392400
     },
     extra: {
-      # A lot of Ebay info about user. 
+      raw_info: {
+        # A lot of Ebay info about user. 
+      }
     }
 }
 ```

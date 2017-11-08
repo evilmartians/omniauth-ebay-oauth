@@ -13,7 +13,7 @@ module OmniAuth
 
       def info
         {
-          username:   @info['UserID'],
+          nickname:   @info['UserID'],
           first_name: name.split.first,
           last_name:  name.split.last,
           email:      @info['Email'],
@@ -23,7 +23,9 @@ module OmniAuth
       end
 
       def extra
-        @info
+        {
+          raw_info: @info
+        }
       end
 
       private

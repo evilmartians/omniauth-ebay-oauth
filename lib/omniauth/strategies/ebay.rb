@@ -26,7 +26,10 @@ module OmniAuth
 
       def credentials
         super.tap do |hash|
-          hash.merge!('refresh_token_expires_in' => access_token['refresh_token_expires_in'].to_i)
+          hash.merge!(
+            'refresh_token_expires_at' => Time.now.to_i +
+              access_token['refresh_token_expires_in'].to_i
+          )
         end
       end
 
