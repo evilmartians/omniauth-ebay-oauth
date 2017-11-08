@@ -9,18 +9,90 @@ OmniAuth Strategy for eBay Apps (for using with eBay REST APIs)
 
 ## Installation
 
-TBD
+Add gem to your Gemfile:
 
+`gem 'omniauth-ebay-oauth'`
+
+and then run `bundle install`
 
 ## Usage
 
-TBD
+Register your application in [Ebay Developer Program](https://go.developer.ebay.com) to get all the
+credentials required below:
 
+```ruby
+use OmniAuth::Builder do
+  provider :ebay, APP_ID, CERT_ID, RUNAME
+end
+```
+
+### Using sandbox environment
+
+Production environment is used by default.
+If you like to play in sandbox, just pass the proper option:
+
+```ruby
+use OmniAuth::Builder do
+  provider :ebay, APP_ID, CERT_ID, RUNAME, sandbox: true
+end
+```
+
+### Using Ebay OAuth Scopes
+
+If you totally omit the `scope` option then by default your token will be assigned to public one
+`https://api.ebay.com/oauth/api_scope`
+
+To get access to the certain scope pass the `scope` option with scope name:
+
+```ruby
+use OmniAuth::Builder do
+  provider :ebay, APP_ID, CERT_ID, RUNAME, scope: 'sell.marketing'
+end
+```
+
+To get access to the several scopes pass the `scope` option with array of desired scopes names:
+
+```ruby
+use OmniAuth::Builder do
+  provider :ebay, APP_ID, CERT_ID, RUNAME, scope: ['buy.order.readonly', 'sell.marketing']
+end
+```
+
+### Auth Hash Schema
+
+```ruby
+{
+    provider: "ebay",
+    uid: "nY+sHZ2PrBmdj6wVnY+s75FEZ2PrA2dj6wFk4GnC5iFoA6dj6x9nY+seQ==",
+    info: {
+        nickname: "john_appleseed",
+        first_name: "John",
+        last_name: "Appleseed",
+        email: "john_appleseed@gmail.com",
+        phone: "1000085478",
+        country: "US",
+        name: "John Appleseed"
+    },
+    credentials: {
+        token: "v^1.1#i^1#f^0#I^3#r^...very long token here",
+        refresh_token: "v^1.1#i^1#f^0#I^3#r^1#p^3#t^Ul4xMF8xO...shorter one",
+        expires_at: 1510131176,
+        expires: true,
+        refresh_token_expires_at: 1557392400
+    },
+    extra: {
+      raw_info: {
+        # A lot of Ebay info about user. 
+      }
+    }
+}
+```
 
 ## Development
 
-TBD
+To run the tests:
 
+`bundle exec rake`
 
 ## Contributing
 

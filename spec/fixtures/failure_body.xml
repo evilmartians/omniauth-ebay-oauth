@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetUserResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+  <Timestamp>2017-11-07T09:23:35.269Z</Timestamp>
+  <Ack>Failure</Ack>
+  <Errors>
+    <ShortMessage>Invalid IAF token.</ShortMessage>
+    <LongMessage>IAF token supplied is invalid. </LongMessage>
+    <ErrorCode>21916984</ErrorCode>
+    <SeverityCode>Error</SeverityCode>
+    <ErrorClassification>RequestError</ErrorClassification>
+  </Errors>
+  <Version>1031</Version>
+  <Build>E1031_CORE_API_18535225_R1</Build>
+</GetUserResponse>
