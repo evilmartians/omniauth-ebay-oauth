@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'helpers/user_info_helper'
 
-RSpec.describe OmniAuth::Ebay::UserInfo do
+RSpec.describe OmniAuth::EbayOauth::UserInfo do
   include UserInfoHelper
 
   subject { described_class.new(MultiXml.parse(successful_body)) }

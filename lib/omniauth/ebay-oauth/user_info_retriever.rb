@@ -4,13 +4,13 @@ require 'multi_xml'
 require 'net/http'
 
 module OmniAuth
-  module Ebay
+  module EbayOauth
     class ResponseCodeError < StandardError; end
     class ResponseResultError < StandardError; end
 
     class UserInfoRetriever # :nodoc:
-      API_COMPATIBILITY_LEVEL = '1031'.freeze
-      TOKEN_HEADER = 'X-EBAY-API-IAF-TOKEN'.freeze
+      API_COMPATIBILITY_LEVEL = '1031'
+      TOKEN_HEADER = 'X-EBAY-API-IAF-TOKEN'
 
       USER_INFO_REQUEST_BODY = %(
         <?xml version="1.0" encoding="utf-8"?>
@@ -19,7 +19,7 @@ module OmniAuth
           <ErrorLanguage>en_US</ErrorLanguage>
           <WarningLevel>High</WarningLevel>
         </GetUserRequest>
-      ).freeze
+      )
 
       USER_INFO_HEADERS = {
         'X-EBAY-API-SITEID'              => '0',

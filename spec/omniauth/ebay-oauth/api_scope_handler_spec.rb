@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe OmniAuth::Ebay::ApiScopeHandler do
+RSpec.describe OmniAuth::EbayOauth::ApiScopeHandler do
   describe '#scopes_list' do
     subject do
       described_class.new(scopes).scopes_list

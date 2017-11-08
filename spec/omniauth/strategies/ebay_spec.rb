@@ -47,15 +47,15 @@ RSpec.describe OmniAuth::Strategies::Ebay do
     end
 
     before do
-      allow(OmniAuth::Ebay::UserInfoRetriever)
+      allow(OmniAuth::EbayOauth::UserInfoRetriever)
         .to receive(:new)
-        .and_return(instance_double(OmniAuth::Ebay::UserInfoRetriever, info: user_info))
+        .and_return(instance_double(OmniAuth::EbayOauth::UserInfoRetriever, info: user_info))
       allow(subject).to receive(:access_token)
         .and_return(instance_double(OAuth2::AccessToken, token: 'my_access_token'))
     end
 
     it 'returns instance of UserInfo' do
-      expect(subject.raw_info).to be_instance_of(OmniAuth::Ebay::UserInfo)
+      expect(subject.raw_info).to be_instance_of(OmniAuth::EbayOauth::UserInfo)
     end
   end
 

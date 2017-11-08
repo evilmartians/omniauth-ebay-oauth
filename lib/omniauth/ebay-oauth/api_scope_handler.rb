@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module OmniAuth
-  module Ebay
-    DEFAULT_SCOPE = 'https://api.ebay.com/oauth/api_scope'.freeze
-    SCOPE_DELIMITER = '|'.freeze
+  module EbayOauth
+    DEFAULT_SCOPE = 'https://api.ebay.com/oauth/api_scope'
+    SCOPE_DELIMITER = '|'
 
     class ApiScopeHandler # :nodoc:
       def initialize(scopes)

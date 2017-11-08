@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'helpers/user_info_helper'
 
-RSpec.describe OmniAuth::Ebay::UserInfoRetriever do
+RSpec.describe OmniAuth::EbayOauth::UserInfoRetriever do
   include UserInfoHelper
 
   let(:token) { '123456789' }
@@ -28,14 +28,14 @@ RSpec.describe OmniAuth::Ebay::UserInfoRetriever do
     context 'when response is not successful' do
       it 'raises ResponseCodeError' do
         stub_response_with_bad_code
-        expect { subject.info }.to raise_error(OmniAuth::Ebay::ResponseCodeError)
+        expect { subject.info }.to raise_error(OmniAuth::EbayOauth::ResponseCodeError)
       end
     end
 
     context 'when response is successful but has failure status' do
       it 'raises ResponseResultError' do
         stub_response_with_bad_status
-        expect { subject.info }.to raise_error(OmniAuth::Ebay::ResponseResultError)
+        expect { subject.info }.to raise_error(OmniAuth::EbayOauth::ResponseResultError)
       end
     end
   end

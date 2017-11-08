@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module OmniAuth
-  module Ebay
+  module EbayOauth
     class UserInfo # :nodoc:
       def initialize(info)
         @info = info['GetUserResponse']['User']

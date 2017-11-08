@@ -1,7 +1,12 @@
 AllCops:
   DisplayCopNames: true
   StyleGuideCopsOnly: false
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
+
+Naming/FileName:
+  Exclude:
+    - 'lib/*.rb'
+    - 'spec/**/*.rb'
 
 Metrics/MethodLength:
   Exclude:
@@ -17,6 +22,3 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
 
-Naming/Filename:
-  Exclude:
-    - 'spec/**/*.rb'

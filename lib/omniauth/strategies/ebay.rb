@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'omniauth-oauth2'
-
 module OmniAuth
   module Strategies
     class Ebay < OmniAuth::Strategies::OAuth2 # :nodoc:
@@ -37,8 +35,8 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= OmniAuth::Ebay::UserInfo.new(
-          OmniAuth::Ebay::UserInfoRetriever.new(
+        @raw_info ||= OmniAuth::EbayOauth::UserInfo.new(
+          OmniAuth::EbayOauth::UserInfoRetriever.new(
             access_token.token,
             options.client_options[:user_info_url]
           ).info
@@ -47,7 +45,7 @@ module OmniAuth
 
       def setup_phase
         options.client_options.merge!(options.sandbox ? SANDBOX_URLS : PRODUCTION_URLS)
-        options[:scope] = OmniAuth::Ebay::ApiScopeHandler.new(options[:scope]).scopes_list
+        options[:scope] = OmniAuth::EbayOauth::ApiScopeHandler.new(options[:scope]).scopes_list
         super
       end
     end
