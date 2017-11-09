@@ -3,8 +3,6 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     class Ebay < OmniAuth::Strategies::OAuth2
-      include EbayAPI
-
       args %i[client_id client_secret runame]
 
       option :name, 'ebay'
@@ -17,6 +15,8 @@ module OmniAuth
       option :runame, nil
       option :environment, :production
       option :siteid, 0
+
+      BASE_SCOPE_URL = 'https://api.ebay.com/oauth/api_scope'
 
       def authorize_params
         super.tap do |params|
@@ -53,7 +53,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= user_info
+        @raw_info ||= OmniAuth::Strategies::EbayAPI.new(access_token, options).user_info
       end
 
       private

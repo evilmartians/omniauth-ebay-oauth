@@ -60,12 +60,15 @@ RSpec.describe OmniAuth::Strategies::Ebay do
   end
 
   describe '#credentials' do
+    let(:current_time) { Time.now.to_i }
+    let(:refresh_token_expires_in) { 946_688_400 }
+
     before :each do
       @access_token = double('oauth2 access token').as_null_object
       allow(subject).to receive(:access_token).and_return(@access_token)
-      allow(@access_token).to receive(:[]).and_return(946_688_400)
+      allow(@access_token).to receive(:[]).and_return(refresh_token_expires_in)
     end
 
-    it { expect(subject.credentials[:refresh_token_expires_in]).to eq(946_688_400) }
+    it { expect(subject.credentials[:refresh_token_expires_at]).to eq(refresh_token_expires_in + current_time) }
   end
 end

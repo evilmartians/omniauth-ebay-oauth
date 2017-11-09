@@ -1,23 +1,12 @@
 require 'spec_helper'
-require 'ostruct'
 
-class FakeStrategy
-  include EbayAPI
-
-  def options
-    @options ||= begin
-      options = OpenStruct.new
-      options.runame = 'runame'
-      options
-    end
-  end
-end
-
-RSpec.describe EbayAPI do
-  subject { FakeStrategy.new }
+RSpec.describe OmniAuth::Strategies::EbayAPI do
+  let(:access_token) { instance_double(OAuth2::AccessToken, token: 'token') }
   let(:good_response) { 'good response' }
   let(:bad_response) { 'bad response' }
   let(:bad_parsed_response) { {} }
+
+  subject { described_class.new(access_token, {}) }
 
   describe '#get_user_info' do
     let(:good_parsed_response) do
@@ -54,7 +43,7 @@ RSpec.describe EbayAPI do
       end
 
       it 'should raise EbayAPIError for a bad response' do
-        expect { subject.user_info }.to raise_error EbayAPI::EbayApiError
+        expect { subject.user_info }.to raise_error OmniAuth::Strategies::EbayAPI::EbayApiError
       end
     end
   end
