@@ -30,13 +30,6 @@ module EbayAPI
     URI.parse(api_url)
   end
 
-  def get_scope(params)
-    raw_scope = params[:scope] || BASE_SCOPE_URL
-    scope_list = raw_scope.split(' ').map { |item| item.split(',') }.flatten
-    scope_list.map! { |s| s =~ %r{^https?://} ? s : "#{BASE_SCOPE_URL}/#{s}" }
-    scope_list.join(' ')
-  end
-
   def user_info
     parsed_response, response = api_get_user
     user = parsed_response && parsed_response['GetUserResponse'] &&

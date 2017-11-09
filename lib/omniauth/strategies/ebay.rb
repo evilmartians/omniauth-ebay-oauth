@@ -5,7 +5,7 @@ module OmniAuth
     class Ebay < OmniAuth::Strategies::OAuth2
       include EbayAPI
 
-      args %i[client_id client_secret runame siteid environment]
+      args %i[client_id client_secret runame]
 
       option :name, 'ebay'
       option :client_options, site: 'https://api.ebay.com',
@@ -20,7 +20,7 @@ module OmniAuth
 
       def authorize_params
         super.tap do |params|
-          params[:scope] = get_scope(params)
+          params[:scope] = scopes(params)
         end
       end
 
@@ -32,28 +32,36 @@ module OmniAuth
 
       info do
         {
-          :nickname => raw_info['UserID'],
-          :email => raw_info['Email'],
-          :full_name => raw_info['RegistrationAddress'] && raw_info['RegistrationAddress']['Name'],
-          :country => raw_info['RegistrationAddress'] && raw_info['RegistrationAddress']['Country'],
-          :phone => raw_info['RegistrationAddress'] && raw_info['RegistrationAddress']['Phone']
+          nickname: raw_info['UserID'],
+          email: raw_info['Email'],
+          full_name: raw_info['RegistrationAddress'] && raw_info['RegistrationAddress']['Name'],
+          country: raw_info['RegistrationAddress'] && raw_info['RegistrationAddress']['Country'],
+          phone: raw_info['RegistrationAddress'] && raw_info['RegistrationAddress']['Phone']
         }
       end
 
       extra do
         {
-          :raw_info => raw_info
+          raw_info: raw_info
         }
       end
 
       credentials do
         {
-          :refresh_token_expires_in => access_token['refresh_token_expires_in'].to_i
+          refresh_token_expires_at: access_token['refresh_token_expires_in'].to_i + Time.now.to_i
         }
       end
 
       def raw_info
         @raw_info ||= user_info
+      end
+
+      private
+
+      def scopes(params)
+        raw_scopes = params[:scope] || BASE_SCOPE_URL
+        scope_list = raw_scopes.map { |s| s =~ %r{^https?://} ? s : "#{BASE_SCOPE_URL}/#{s}" }
+        scope_list.join(' ')
       end
     end
   end

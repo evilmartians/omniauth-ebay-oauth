@@ -18,7 +18,5 @@ Style/FileName:
   Enabled: false
 Style/MutableConstant:
   Enabled: false
-Style/HashSyntax:
-  EnforcedStyle: no_mixed_keys
 Style/Documentation:
   Enabled: false

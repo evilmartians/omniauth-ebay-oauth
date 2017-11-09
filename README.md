@@ -44,7 +44,7 @@ Scopes starting with `https://api.ebay.com/oauth/api_scope` do not need that pre
 
     ```ruby
     Rails.application.config.middleware.use OmniAuth::Builder do
-      provider :ebay, ENV['EBAY_KEY'], ENV['EBAY_SECRET'], ENV['EBAY_RUNAME'], scope: "sell.marketing, sell.account.readonly"
+      provider :ebay, ENV['EBAY_KEY'], ENV['EBAY_SECRET'], ENV['EBAY_RUNAME'], scope: ["sell.marketing", "sell.account.readonly"]
     end
     ```
 
