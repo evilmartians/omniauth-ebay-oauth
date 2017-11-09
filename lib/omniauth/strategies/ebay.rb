@@ -53,7 +53,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= OmniAuth::Strategies::EbayAPI.new(access_token, options).user_info
+        @raw_info ||= OmniAuth::EbayOAuth::API.new(access_token, options).user_info
       end
 
       private

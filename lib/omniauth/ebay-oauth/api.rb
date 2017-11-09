@@ -2,8 +2,8 @@ require 'multi_xml'
 require 'net/http'
 
 module OmniAuth
-  module Strategies
-    class EbayAPI
+  module EbayOAuth
+    class API
       class EbayApiError < StandardError
         attr_accessor :request, :response
 

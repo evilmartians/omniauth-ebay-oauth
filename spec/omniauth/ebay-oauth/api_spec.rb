@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe OmniAuth::Strategies::EbayAPI do
+RSpec.describe OmniAuth::EbayOAuth::API do
   let(:access_token) { instance_double(OAuth2::AccessToken, token: 'token') }
   let(:good_response) { 'good response' }
   let(:bad_response) { 'bad response' }
@@ -43,7 +43,7 @@ RSpec.describe OmniAuth::Strategies::EbayAPI do
       end
 
       it 'should raise EbayAPIError for a bad response' do
-        expect { subject.user_info }.to raise_error OmniAuth::Strategies::EbayAPI::EbayApiError
+        expect { subject.user_info }.to raise_error OmniAuth::EbayOAuth::API::EbayApiError
       end
     end
   end

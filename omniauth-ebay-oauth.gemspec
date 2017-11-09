@@ -1,8 +1,8 @@
-require File.expand_path('../lib/omniauth-ebay-oauth/version', __FILE__)
+require File.expand_path('../lib/omniauth/ebay-oauth/version', __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name          = 'omniauth-ebay-oauth'
-  spec.version       = OmniAuth::EbayOAuth2::VERSION
+  spec.version       = OmniAuth::EbayOAuth::VERSION
   spec.authors       = ['Andrey Paderin', 'Andrey Novikov']
   spec.email         = ['paderinandrey2011@gmail.com', 'envek@envek.name']
 

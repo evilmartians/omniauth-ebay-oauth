@@ -1,3 +1,3 @@
-require 'omniauth-ebay-oauth/version'
-require 'ebay_api'
+require 'omniauth/ebay-oauth/version'
+require 'omniauth/ebay-oauth/api'
 require 'omniauth/strategies/ebay'
