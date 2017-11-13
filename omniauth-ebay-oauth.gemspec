@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Ignat Zakrevsky']
   spec.email         = ['iezakrevsky@gmail.com']
   spec.summary       = 'OmniAuth strategy for new eBay OAuth API'
-  spec.homepage      = 'https://github.com/Envek/omniauth-ebay-oauth'
+  spec.homepage      = 'https://github.com/evilmartians/omniauth-ebay-oauth'
   spec.license       = 'MIT'
 
   spec.required_ruby_version = '>= 2.3'

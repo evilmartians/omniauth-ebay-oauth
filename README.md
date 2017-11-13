@@ -71,7 +71,7 @@ Please, keep in mind [OmniAuth Strategy Contribution Guide](<https://github.com/
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Envek/omniauth-ebay-oauth.
+Bug reports and pull requests are welcome on GitHub at https://github.com/evilmartians/omniauth-ebay-oauth.
 
 
 ## License
