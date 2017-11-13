@@ -1,0 +1,10 @@
+---
+Accept: "*/*"
+Accept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+Content-Type: text/xml
+Host: api.com
+User-Agent: Ruby
+X-Ebay-Api-Call-Name: GetUser
+X-Ebay-Api-Compatibility-Level: '967'
+X-Ebay-Api-Iaf-Token: token
+X-Ebay-Api-Siteid: '0'

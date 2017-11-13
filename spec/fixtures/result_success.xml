@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetUserResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+  <Timestamp>2017-11-03T15:31:05.024Z</Timestamp>
+  <Ack>Success</Ack>
+  <Version>1031</Version>
+  <Build>E1031_CORE_APISIGNIN_18531943_R1</Build>
+  <User>
+    <AboutMePage>false</AboutMePage>
+    <EIASToken>nY+sHZ2PrKoij6wVnY+sEZ2PrA2dj6ACmYChC5WDoQydj6x9nY+seQ==</EIASToken>
+    <Email>olegpetrov@mail.com</Email>
+    <FeedbackScore>0</FeedbackScore>
+    <UniqueNegativeFeedbackCount>0</UniqueNegativeFeedbackCount>
+    <UniquePositiveFeedbackCount>0</UniquePositiveFeedbackCount>
+    <PositiveFeedbackPercent>0.0</PositiveFeedbackPercent>
+    <FeedbackPrivate>false</FeedbackPrivate>
+    <FeedbackRatingStar>None</FeedbackRatingStar>
+    <IDVerified>false</IDVerified>
+    <eBayGoodStanding>true</eBayGoodStanding>
+    <NewUser>true</NewUser>
+    <RegistrationAddress>
+      <Name>Oleg Petrov</Name>
+      <Street>Ap #867-859 Sit Rd.</Street>
+      <Street1>Sit Rd</Street1>
+      <Street2>#867-859</Street2>
+      <CityName>Azusa</CityName>
+      <Country>US</Country>
+      <CountryName>United States</CountryName>
+      <Phone>7931516230</Phone>
+      <PostalCode>91702</PostalCode>
+    </RegistrationAddress>
+    <RegistrationDate>2017-11-01T20:21:09.000Z</RegistrationDate>
+    <Site>US</Site>
+    <Status>Confirmed</Status>
+    <UserID>olegpetrov</UserID>
+    <UserIDChanged>false</UserIDChanged>
+    <VATStatus>NoVATTax</VATStatus>
+    <SellerInfo>
+      <AllowPaymentEdit>true</AllowPaymentEdit>
+      <CheckoutEnabled>true</CheckoutEnabled>
+      <CIPBankAccountStored>false</CIPBankAccountStored>
+      <GoodStanding>true</GoodStanding>
+      <LiveAuctionAuthorized>false</LiveAuctionAuthorized>
+      <MerchandizingPref>OptIn</MerchandizingPref>
+      <QualifiesForB2BVAT>false</QualifiesForB2BVAT>
+      <SellerGuaranteeLevel>NotEligible</SellerGuaranteeLevel>
+      <SchedulingInfo>
+        <MaxScheduledMinutes>30240</MaxScheduledMinutes>
+        <MinScheduledMinutes>0</MinScheduledMinutes>
+        <MaxScheduledItems>3000</MaxScheduledItems>
+      </SchedulingInfo>
+      <StoreOwner>false</StoreOwner>
+      <SellerBusinessType>Private</SellerBusinessType>
+      <PaymentMethod>NothingOnFile</PaymentMethod>
+      <CharityRegistered>false</CharityRegistered>
+      <SafePaymentExempt>false</SafePaymentExempt>
+      <TransactionPercent>0.0</TransactionPercent>
+      <RecoupmentPolicyConsent />
+      <DomesticRateTable>false</DomesticRateTable>
+      <InternationalRateTable>false</InternationalRateTable>
+    </SellerInfo>
+    <BusinessRole>FullMarketPlaceParticipant</BusinessRole>
+    <eBayWikiReadOnly>false</eBayWikiReadOnly>
+    <MotorsDealer>false</MotorsDealer>
+    <UniqueNeutralFeedbackCount>0</UniqueNeutralFeedbackCount>
+    <EnterpriseSeller>false</EnterpriseSeller>
+  </User>
+</GetUserResponse>
