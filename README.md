@@ -6,14 +6,43 @@ OmniAuth Strategy for eBay Apps (for using with eBay REST APIs)
 <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
 
+## Preface
+
+> Why do I need it? There are a couple of other gems with OmniAuth strategies for eBay?
+
+eBay has two different authorization methods: Auth'n'auth and OAuth. Technically, they are both uses OAuth2 protocol (just to embrace a little confusion).
+
+This gem implements authorization with OAuth method while currently available gems (like [ebay_request](https://github.com/gzigzigzeo/ebay_request) or [omniauth-ebay](https://github.com/TheGiftsProject/omniauth-ebay)) implements Auth'n'auth.
+
+__What is the difference? Access tokens!__
+
+With Auth'n'auth you will get a single token which you can use to access old eBay XML APIs (Trading API, etc.)
+
+With OAuth, you will get a pair of access and refresh tokens which can be used to access new eBay REST APIs (Buy API, Sell API, etc.)
+
+However, you can use new OAuth tokens to access old APIs by providing an access token in (not yet) documented HTTP header `X-EBAY-API-IAF-TOKEN` (like this gem uses it to obtain information about an authenticated user from Trading API).
+
+If you plan to use only old APIs, you can look at [ebay_request](https://github.com/gzigzigzeo/ebay_request) gem.
+
+If you plan to use new APIs, you are welcome to use this gem either standalone or together with [ebay_api](https://github.com/nepalez/ebay_api) client get for REST APIs.
+
+Now you can read the eBay docs about [REST APIs](https://developer.ebay.com/api-docs/static/ebay-rest-landing.html) and [OAuth](https://developer.ebay.com/api-docs/static/oauth-quick-ref-user-tokens.html) and then proceed to…
+
 
 ## Installation
 
 Add to your Gemfile:
 
-`gem 'omniauth-ebay-oauth'`
+```ruby
+gem 'omniauth-ebay-oauth'
+```
 
-Then `bundle install`.
+Then execute:
+
+```sh
+bundle install
+```
+
 
 ## Usage
 
@@ -35,6 +64,7 @@ Additional options:
   - \+ all [OmniAuth](<https://github.com/omniauth/omniauth>) supported options, like: `callback_path`, `provider_ignores_state` and so on.
 
 Additional usage information could be found on [OmniAuth README page](<https://github.com/omniauth/omniauth#integrating-omniauth-into-your-application>).
+
 
 ## Minimal working Sinatra application:
 
