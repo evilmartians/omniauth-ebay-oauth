@@ -1,3 +1,7 @@
+[![Gem Version](https://badge.fury.io/rb/omniauth-ebay-oauth.svg)](https://badge.fury.io/rb/omniauth-ebay-oauth)
+[![Build Status](https://travis-ci.org/evilmartians/omniauth-ebay-oauth.svg?branch=master)](https://travis-ci.org/evilmartians/omniauth-ebay-oauth)
+[![Cult of Martians](http://cultofmartians.com/assets/badges/badge.svg)](http://cultofmartians.com/tasks/ebay-oauth-signin.html)
+
 # omniauth-ebay-oauth
 
 OmniAuth Strategy for eBay Apps (for using with eBay REST APIs)
