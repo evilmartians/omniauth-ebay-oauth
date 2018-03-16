@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe OmniAuth::Strategies::Ebay do
+RSpec.describe OmniAuth::Strategies::EbayOauth do
   subject { described_class.new(nil, options) }
 
   describe '#callback_url' do

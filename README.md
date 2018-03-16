@@ -52,7 +52,7 @@ bundle install
 
 ```ruby
 use OmniAuth::Builder do
-  provider :ebay, CLIENT_ID, CLIENT_SECRET, callback_url: RU_NAME,
+  provider :ebay_oauth, CLIENT_ID, CLIENT_SECRET, callback_url: RU_NAME,
     sandbox: false, scope: 'https://api.ebay.com/oauth/api_scope' # redefining additional default options
 end
 ```
@@ -78,8 +78,8 @@ require 'omniauth-ebay-oauth'
 
 use Rack::Session::Cookie
 use OmniAuth::Builder do
-  provider :ebay, ENV['EBAY_CLIENT_ID'], ENV['EBAY_CLIENT_SECRET'],
-    callback_url: ENV['EBAY_RU_NAME']
+  provider :ebay_oauth, ENV['EBAY_CLIENT_ID'], ENV['EBAY_CLIENT_SECRET'],
+    callback_url: ENV['EBAY_RU_NAME'], name: 'ebay'
 end
 
 get '/' do

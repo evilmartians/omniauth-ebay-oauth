@@ -5,7 +5,7 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     # OmniAuth strategy for eBay
-    class Ebay < OmniAuth::Strategies::OAuth2
+    class EbayOauth < OmniAuth::Strategies::OAuth2
       option :production_client_options,
              user_info_endpoint: 'https://api.ebay.com/ws/api.dll',
              token_url: 'https://api.ebay.com/identity/v1/oauth2/token',
