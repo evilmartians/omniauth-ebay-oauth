@@ -19,6 +19,10 @@ module OmniAuth
         'X-EBAY-API-CALL-NAME' => 'GetUser'
       }.freeze
 
+      ERRORS = {
+        '841' => UserSuspended
+      }.freeze
+
       def initialize(access_token, request: USER_REQUEST,
                      user_info_endpoint:, read_timeout:, **_args)
         @access_token = access_token
@@ -45,7 +49,13 @@ module OmniAuth
 
       def ensure_success_result(body)
         return if body.dig(*STATUS_PATH) == SUCCESS_CODE
-        raise FailureResponseResult, body
+
+        error_code = body.dig('GetUserResponse', 'Errors', 'ErrorCode')
+        raise(FailureResponseResult, body) unless ERRORS.key?(error_code)
+
+        err_class = ERRORS[error_code]
+        err_message = body.dig('GetUserResponse', 'Errors', 'LongMessage')
+        raise err_class, err_message
       end
 
       def http

@@ -2,8 +2,10 @@
 
 module OmniAuth
   module EbayOauth
-    class FailureResponseCode < StandardError; end
-    class FailureResponseResult < StandardError; end
-    class UnsupportedSchemaError < StandardError; end
+    class Error < RuntimeError; end
+    class FailureResponseCode < Error; end
+    class FailureResponseResult < Error; end
+    class UnsupportedSchemaError < Error; end
+    class UserSuspended < Error; end
   end
 end

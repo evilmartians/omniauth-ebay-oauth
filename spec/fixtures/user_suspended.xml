@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetUserResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+  <Timestamp>2018-03-21T09:22:11.985Z</Timestamp>
+  <Ack>Failure</Ack>
+  <Errors>
+    <ShortMessage>Requested user is suspended.</ShortMessage>
+    <LongMessage>The account for user ID \"evilenvek\" specified in this request is suspended. Sorry, you can only request information for current users.</LongMessage>
+    <ErrorCode>841</ErrorCode>
+    <SeverityCode>Error</SeverityCode>
+    <ErrorClassification>RequestError</ErrorClassification>
+    <ErrorParameters>
+      <ParamID>0</ParamID>
+      <Value>evilenvek</Value>
+    </ErrorParameters>
+  </Errors>
+  <Version>1045</Version>
+  <Build>E1045_CORE_APISIGNIN_18614794_R</Build>
+</GetUserResponse>

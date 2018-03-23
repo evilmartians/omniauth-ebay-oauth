@@ -33,6 +33,12 @@ module OmniAuth
         super
       end
 
+      def callback_phase
+        super
+      rescue ::OmniAuth::EbayOauth::UserSuspended => e
+        fail!(:user_suspended, e)
+      end
+
       def callback_url
         options.callback_url
       end

@@ -3,6 +3,8 @@
 require 'spec_helper'
 
 RSpec.describe OmniAuth::Strategies::EbayOauth do
+  let(:options) { {} }
+
   subject { described_class.new(nil, options) }
 
   describe '#callback_url' do
@@ -14,8 +16,6 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
   end
 
   describe '#options' do
-    let(:options) { {} }
-
     before { subject.setup_phase }
 
     it 'default mode is sandbox' do
@@ -33,8 +33,6 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
     end
 
     context "when scopes aren't passed" do
-      let(:options) { {} }
-
       it 'uses empty string as scope' do
         expect(subject.options.scope).to eql ''
       end
@@ -99,7 +97,6 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
 
   describe '#user_info' do
     let(:access_token) { instance_double(OAuth2::AccessToken, token: :token) }
-    let(:options) { {} }
     let(:user_info) { instance_double(OmniAuth::EbayOauth::UserInfo) }
     let(:request) do
       instance_double(OmniAuth::EbayOauth::UserInfoRequest, call: {})
@@ -120,8 +117,6 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
 
   describe '#credentials' do
     let(:access_token) { OAuth2::AccessToken.new(client, token, opts) }
-    let(:options) { {} }
-
     let(:client) { instance_double(OAuth2::Client) }
     let(:token)  { 'v^1.1#i^1#f^0#I^3#r^0#p^3#t^H4sIAAAAAAAAAOlongstringtoken' }
     let(:opts) do
@@ -142,6 +137,22 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
     it 'adds refresh_token_expires_at for default OAuth2 credentials hash' do
       expect(subject.credentials['refresh_token_expires_at'])
         .to be_between(current_time, current_time + expiration_time)
+    end
+  end
+
+  describe '#callback_phase' do
+    context 'when user is suspended' do
+      before do
+        allow(subject).to receive(:request) do
+          raise OmniAuth::EbayOauth::UserSuspended
+        end
+        allow(subject).to receive(:fail!)
+      end
+
+      it 'fails with user_suspended message' do
+        subject.callback_phase
+        expect(subject).to have_received(:fail!).with(:user_suspended, anything)
+      end
     end
   end
 end

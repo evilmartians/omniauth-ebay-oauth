@@ -15,6 +15,7 @@ RSpec.describe OmniAuth::EbayOauth::UserInfoRequest do
   let(:request_headers) { YAML.load_file('spec/fixtures/request_headers.yml') }
   let(:failure_result)  { File.read('spec/fixtures/result_failure.xml') }
   let(:success_result)  { File.read('spec/fixtures/result_success.xml') }
+  let(:user_suspended_result)  { File.read('spec/fixtures/user_suspended.xml') }
 
   it 'raises error if eBay API request returned non-successful code' do
     stub_request(:post, endpoint)
@@ -38,5 +39,13 @@ RSpec.describe OmniAuth::EbayOauth::UserInfoRequest do
       .to_return(status: 200, body: success_result, headers: {})
     expect(subject.call.fetch('GetUserResponse').keys)
       .to eql %w[xmlns Timestamp Ack Version Build User]
+  end
+
+  it 'raises error if eBay user is suspended' do
+    stub_request(:post, endpoint)
+      .with(body: body, headers: request_headers)
+      .to_return(status: 200, body: user_suspended_result, headers: {})
+    expect { subject.call }
+      .to raise_error(OmniAuth::EbayOauth::UserSuspended)
   end
 end
