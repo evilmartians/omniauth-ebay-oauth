@@ -9,11 +9,11 @@ module OmniAuth
       option :production_client_options,
              user_info_endpoint: 'https://api.ebay.com/ws/api.dll',
              token_url: 'https://api.ebay.com/identity/v1/oauth2/token',
-             authorize_url: 'https://signin.ebay.com/authorize'
+             authorize_url: 'https://auth.ebay.com/oauth2/authorize'
       option :sandbox_client_options,
              user_info_endpoint: 'https://api.sandbox.ebay.com/ws/api.dll',
              token_url: 'https://api.sandbox.ebay.com/identity/v1/oauth2/token',
-             authorize_url: 'https://signin.sandbox.ebay.com/authorize'
+             authorize_url: 'https://auth.sandbox.ebay.com/oauth2/authorize'
 
       option :name, :ebay
       option :sandbox, true

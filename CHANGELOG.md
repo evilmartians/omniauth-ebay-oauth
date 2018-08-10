@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2018-08-10
+
+### Changed
+
+ - Changed default authentication endpoint. @Envek
+
+   Before: https://signin.ebay.com/authorize – always displays user consent screen “Allow APP_NAME to act on your behalf?”.
+
+   After:  https://auth.ebay.com/oauth2/authorize – doesn't repeatedly ask for user consent.
+
+   I can't find new endpoint address in docs, but it is used in the wild.
+
 ## [0.3.0] - 2018-03-23
 
 ### Added

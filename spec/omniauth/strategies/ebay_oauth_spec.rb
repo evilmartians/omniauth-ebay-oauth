@@ -71,7 +71,7 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
 
       it 'has correct eBay sandbox authorize url' do
         expect(subject.options.client_options.authorize_url)
-          .to eq('https://signin.sandbox.ebay.com/authorize')
+          .to eq('https://auth.sandbox.ebay.com/oauth2/authorize')
       end
     end
 
@@ -90,7 +90,7 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
 
       it 'has correct eBay production authorize url' do
         expect(subject.options.client_options.authorize_url)
-          .to eq('https://signin.ebay.com/authorize')
+          .to eq('https://auth.ebay.com/oauth2/authorize')
       end
     end
   end
