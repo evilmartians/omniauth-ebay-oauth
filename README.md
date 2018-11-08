@@ -20,15 +20,15 @@ This gem implements authorization with OAuth method while currently available ge
 
 __What is the difference? Access tokens!__
 
-With Auth'n'auth you will get a single token which you can use to access old eBay XML APIs (Trading API, etc.)
+With Auth'n'auth you will get a single token which you can use to access only old eBay XML APIs (Trading API, etc.)
 
 With OAuth, you will get a pair of access and refresh tokens which can be used to access new eBay REST APIs (Buy API, Sell API, etc.)
 
-However, you can use new OAuth tokens to access old APIs by providing an access token in (not yet) documented HTTP header `X-EBAY-API-IAF-TOKEN` (like this gem uses it to obtain information about an authenticated user from Trading API).
+However, you can use new OAuth tokens to access old APIs too by providing an access token in HTTP header `X-EBAY-API-IAF-TOKEN`. This is documented in eBay developer program website: [Using OAuth with the eBay traditional APIs](https://developer.ebay.com/api-docs/static/oauth-trad-apis.html#Implemen).
 
-If you plan to use only old APIs, you can look at [ebay_request](https://github.com/gzigzigzeo/ebay_request) gem.
+If you plan to use new APIs, you are welcome to use this gem together with [ebay_api](https://github.com/nepalez/ebay_api) client gem for REST APIs.
 
-If you plan to use new APIs, you are welcome to use this gem either standalone or together with [ebay_api](https://github.com/nepalez/ebay_api) client get for REST APIs.
+For old APIs, you can look at [ebay_request](https://github.com/gzigzigzeo/ebay_request) gem (you can configure it to use OAuth tokens).
 
 Now you can read the eBay docs about [REST APIs](https://developer.ebay.com/api-docs/static/ebay-rest-landing.html) and [OAuth](https://developer.ebay.com/api-docs/static/oauth-quick-ref-user-tokens.html) and then proceed to…
 
