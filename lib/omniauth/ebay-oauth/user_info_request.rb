@@ -44,6 +44,7 @@ module OmniAuth
 
       def ensure_success_code(response)
         return if (200..299).cover?(response.code.to_i)
+
         raise FailureResponseCode, response
       end
 
