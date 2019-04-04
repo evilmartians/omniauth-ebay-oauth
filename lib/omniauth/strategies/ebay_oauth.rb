@@ -19,7 +19,7 @@ module OmniAuth
       option :sandbox, true
       option :callback_url
 
-      option :authorize_options, %i[scope]
+      option :authorize_options, %i[scope prompt]
       option :client_options, auth_scheme: :basic_auth, read_timeout: 60
 
       uid          { user_info.uid }

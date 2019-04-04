@@ -56,6 +56,20 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
       end
     end
 
+    context "when prompt isn't provided" do
+      it 'is absent' do
+        expect(subject.options.prompt).to be_nil
+      end
+    end
+
+    context 'when prompt is provided' do
+      let(:options) { { prompt: :login } }
+
+      it 'concatenates passed scopes with space' do
+        expect(subject.options.prompt).to eql :login
+      end
+    end
+
     context 'sandbox mode' do
       let(:options) { { sandbox: true } }
 
