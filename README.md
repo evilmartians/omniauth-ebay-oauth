@@ -103,6 +103,37 @@ bundle exec rake
 
 Please, keep in mind [OmniAuth Strategy Contribution Guide](<https://github.com/omniauth/omniauth/wiki/Strategy-Contribution-Guide>) and [eBay developers program](<https://developer.ebay.com/api-docs/static/oauth-tokens.html>).
 
+### Releasing new versions
+
+1. Bump version number in `lib/omniauth/ebay-oauth/version.rb`
+
+   In case of pre-releases keep in mind [rubygems/rubygems#3086](https://github.com/rubygems/rubygems/issues/3086) and check version with command like `Gem::Version.new(OmniAuth::EbayOauth::VERSION).to_s`
+
+2. Fill `CHANGELOG.md` with missing changes, add header with version and date.
+
+3. Make a commit:
+
+   ```sh
+   git add lib/omniauth/ebay-oauth/version.rb CHANGELOG.md
+   version=$(ruby -r ./lib/omniauth/ebay-oauth/version.rb -e "puts Gem::Version.new(OmniAuth::EbayOauth::VERSION)")
+   git commit --message="${version}: " --edit
+   ```
+
+4. Create annotated tag:
+
+   ```sh
+   git tag v${version} --annotate --message="${version}: " --edit --sign
+   ```
+
+5. Fill version name into subject line and (optionally) some description (list of changes will be taken from `CHANGELOG.md` and appended automatically)
+
+6. Push it:
+
+   ```sh
+   git push --follow-tags
+   ```
+
+7. GitHub Actions will create a new release, build and push gem into [rubygems.org](https://rubygems.org)! You're done!
 
 ## Contributing
 
