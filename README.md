@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/omniauth-ebay-oauth.svg)](https://badge.fury.io/rb/omniauth-ebay-oauth)
-[![Build Status](https://travis-ci.org/evilmartians/omniauth-ebay-oauth.svg?branch=master)](https://travis-ci.org/evilmartians/omniauth-ebay-oauth)
+[![Tests Status](https://github.com/evilmartians/omniauth-ebay-oauth/actions/workflows/test.yml/badge.svg)](https://github.com/evilmartians/omniauth-ebay-oauth/actions)
 [![Cult of Martians](http://cultofmartians.com/assets/badges/badge.svg)](http://cultofmartians.com/tasks/ebay-oauth-signin.html)
 
 # omniauth-ebay-oauth
