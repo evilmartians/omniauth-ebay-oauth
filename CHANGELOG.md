@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2021-04-01
+
+Mark gem as stable
+
+### Changed
+
+ - Relax dependency to [OmniAuth](https://rubygems.org/gems/omniauth) gem to allow using 2.x versions.
+
+   See [OmniAuth 2.0.0 release notes](https://github.com/omniauth/omniauth/releases/tag/v2.0.0) if you want to upgrade to it in your app.
+
 ## [0.5.0] - 2019-04-04
 
 ### Added
@@ -54,6 +64,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  - Initial release: fully working strategy. @ignat-z
 
 
+[1.0.0]: https://github.com/evilmartians/omniauth-ebay-oauth/compare/v0.5.0...v1.0.0
+[0.5.0]: https://github.com/evilmartians/omniauth-ebay-oauth/compare/v0.4.0...v0.5.0
+[0.4.0]: https://github.com/evilmartians/omniauth-ebay-oauth/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/evilmartians/omniauth-ebay-oauth/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/evilmartians/omniauth-ebay-oauth/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/evilmartians/omniauth-ebay-oauth/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/evilmartians/omniauth-ebay-oauth/compare/5213dada5fec8df5da551daf763b6acc84ec7330...v0.1.0
