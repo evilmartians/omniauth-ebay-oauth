@@ -10,22 +10,31 @@ on:
 
 jobs:
   test:
-    name: "Ruby ${{ matrix.ruby }}"
+    name: "Ruby ${{ matrix.ruby }}, omniauth ${{ matrix.omniauth }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          - ruby: 3.0
-          - ruby: 2.7
-          - ruby: 2.6
-          - ruby: 2.5
-          - ruby: 2.4
-          - ruby: 2.3
+          - ruby: "3.0"
+            omniauth: "~> 2.0"
+          - ruby: "2.7"
+            omniauth: "~> 2.0"
+          - ruby: "2.7"
+            omniauth: "~> 1.4"
+          - ruby: "2.6"
+            omniauth: "~> 1.4"
+          - ruby: "2.5"
+            omniauth: "~> 1.4"
+          - ruby: "2.4"
+            omniauth: "~> 1.4"
+          - ruby: "2.3"
+            omniauth: "~> 1.4"
     container:
       image: ruby:${{ matrix.ruby }}
       env:
         CI: true
+        OMNIAUTH_VERSION: "${{ matrix.omniauth }}"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
