@@ -90,6 +90,10 @@ end
 get '/auth/ebay/callback' do
   "Hello, #{request.env['omniauth.auth'].dig('info', 'name')}"
 end
+
+# OmniAuth disables starting authentication with GET request to mitigate CVE-2015-9284.
+# For testing purposes we can enable it, but for production it is better to use POST with CSRF protection/
+OmniAuth.config.allowed_request_methods += %i[get]
 ```
 
 
