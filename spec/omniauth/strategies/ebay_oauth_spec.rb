@@ -5,6 +5,8 @@ require 'spec_helper'
 RSpec.describe OmniAuth::Strategies::EbayOauth do
   let(:options) { {} }
 
+  before { subject.setup_phase }
+
   subject { described_class.new(nil, options) }
 
   describe '#callback_url' do
@@ -16,8 +18,6 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
   end
 
   describe '#options' do
-    before { subject.setup_phase }
-
     it 'default mode is sandbox' do
       expect(subject.options.client_options.user_info_endpoint)
         .to eq('https://api.sandbox.ebay.com/ws/api.dll')
@@ -112,15 +112,12 @@ RSpec.describe OmniAuth::Strategies::EbayOauth do
   describe '#user_info' do
     let(:access_token) { instance_double(OAuth2::AccessToken, token: :token) }
     let(:user_info) { instance_double(OmniAuth::EbayOauth::UserInfo) }
-    let(:request) do
-      instance_double(OmniAuth::EbayOauth::UserInfoRequest, call: {})
-    end
 
     before do
       expect(subject).to receive(:access_token).and_return(access_token)
-      expect(OmniAuth::EbayOauth::UserInfoRequest)
-        .to receive(:new).and_return(request)
-      expect(OmniAuth::EbayOauth::UserInfo)
+      allow_any_instance_of(OmniAuth::EbayOauth::UserInfoRequest)
+        .to receive(:call).and_return({})
+      allow(OmniAuth::EbayOauth::UserInfo)
         .to receive(:new).with({}).and_return(user_info)
     end
 
