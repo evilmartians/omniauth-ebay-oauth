@@ -10,18 +10,20 @@ on:
 
 jobs:
   test:
-    name: "Ruby ${{ matrix.ruby }}, omniauth ${{ matrix.omniauth }}"
+    name: "Ruby ${{ matrix.ruby }} x OmniAuth ${{ matrix.omniauth }}"
+    # Skip running tests for local pull requests (use push event instead), run only for foreign ones
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.owner.login != github.event.pull_request.base.repo.owner.login
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
+          - ruby: "3.1"
+            omniauth: "~> 2.1"
           - ruby: "3.0"
-            omniauth: "~> 2.0"
+            omniauth: "~> 2.1"
           - ruby: "2.7"
-            omniauth: "~> 2.0"
-          - ruby: "2.7"
-            omniauth: "~> 1.4"
+            omniauth: "~> 2.0.4"
           - ruby: "2.6"
             omniauth: "~> 1.4"
           - ruby: "2.5"
